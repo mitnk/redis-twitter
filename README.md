@@ -1,7 +1,5 @@
-A Twitter clone with Redis
-==========================
+A Twitter Clone with Redis/Django
+=================================
 
-as well as Python / Django
 
 Followed: http://redis.io/topics/twitter-clone
-
