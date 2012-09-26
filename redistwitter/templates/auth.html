@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="span8 home">
+        <div class="span3">
+            <form action="{% url redistwitter.twitter.views.login %}" method="post">
+                <h2>Login</h2> {% csrf_token %}
+                {{ login_form.as_p }}
+                <p><input type="submit"></p>
+            </form>
+        </div>
+
+        <div class="span3">
+            <form action="{% url redistwitter.twitter.views.register %}" method="post">
+                <h2>Register</h2> {% csrf_token %}
+                {{ register_form.as_p }}
+                <p><input type="submit"></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

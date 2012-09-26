@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="span5 home">
+        <strong style="font-size:22px;">{{ username }}'s Tweets</strong>
+        {% ifnotequal username my_username %}
+            {% if followed %}
+                <a href="{% url redistwitter.twitter.views.unfollow username=username %}" class="btn">Unfollow</a>
+            {% else %}
+                <a href="{% url redistwitter.twitter.views.follow username=username %}" class="btn">Follow</a>
+            {% endif %}
+        {% endifnotequal %}
+        <hr>
+        {% for item in posts %}
+            <p>{{ item.text }} - {{ item.added }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
