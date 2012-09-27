@@ -1,0 +1,6 @@
+{% extends "twitter/base.html" %}
+
+{% block content %}
+<p><strong style="font-size:1.5em;line-height:1.4em;">{{ post.text }}</strong></p>
+<p>by {{ post.username }}, {{ post.added }}</p>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 
 from redistwitter.twitter.decorators import login_required
@@ -23,7 +23,7 @@ def register(request):
         'register_form': form,
         'login_form': LoginForm(),
     }
-    return render(request, "index.html", context)
+    return render(request, "twitter/index.html", context)
 
 def login(request):
     form = LoginForm(request.POST)
@@ -40,14 +40,12 @@ def login(request):
         'register_form': RegisterForm,
         'login_form': form,
     }
-    return render(request, "index.html", context)
-
+    return render(request, "twitter/index.html", context)
 
 def logout(request):
     if request.session.get("uid"):
         User.logout_user(request, request.session['username'])
     return HttpResponseRedirect(reverse("twitter_home"))
-
 
 def auth(request):
     if request.session.get('uid'):
@@ -58,7 +56,7 @@ def auth(request):
         'register_form': register_form,
         'login_form': login_form,
     }
-    return render(request, "auth.html", context)
+    return render(request, "twitter/auth.html", context)
 
 @login_required
 def index(request):
@@ -75,7 +73,7 @@ def index(request):
         'tweet_form': form,
         'timeline': Tweet.get_timeline(request.session['uid']),
     }
-    return render(request, "index.html", context)
+    return render(request, "twitter/index.html", context)
 
 
 @login_required
@@ -94,6 +92,8 @@ def unfollow(request, username):
 
 @login_required
 def user_page(request, username):
+    if not User.exists(username=username):
+        raise Http404()
     posts = Tweet.get_posts(username=username)
     following = User.is_following(request.session['uid'], username=username)
     context = {
@@ -102,4 +102,12 @@ def user_page(request, username):
         'followed': following,
         'my_username': request.session['username'],
     }
-    return render(request, "user_page.html", context)
+    return render(request, "twitter/user_page.html", context)
+
+def show_post(request, pid):
+    post = Tweet.get_post(pid)
+    context = {
+        'post': post,
+    }
+    return render(request, "twitter/show_post.html", context)
+
