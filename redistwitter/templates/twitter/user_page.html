@@ -6,9 +6,9 @@
     <br>
     {% ifnotequal username my_username %}
         {% if followed %}
-            <a href="{% url redistwitter.twitter.views.unfollow username=username %}" class="btn">Unfollow</a>
+            <a href="{% url twitter_unfollow username %}" class="btn">Unfollow</a>
         {% else %}
-            <a href="{% url redistwitter.twitter.views.follow username=username %}" class="btn">Follow</a>
+            <a href="{% url twitter_follow username %}" class="btn">Follow</a>
         {% endif %}
     {% endifnotequal %}
     <br>

@@ -18,11 +18,3 @@ def get_relative_time(t):
     else:
         return '%d days ago' % (delta / (60 * 60 * 24))
 
-
-def HttpResponseJson(result):
-    if not isinstance(result, dict):
-        result = {'status': 'failed', 'reason': result}
-    response = HttpResponse(json.dumps(result, indent=4),
-                        mimetype='application/json',
-                        content_type = 'application/json; charset=utf8')
-    return response

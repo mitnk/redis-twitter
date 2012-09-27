@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from redistwitter.twitter.models import User
+from models import User
 
 def login_required(view_func):
     def wrapper(request, *args, **kwargs):

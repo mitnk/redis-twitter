@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="row">
-    <form action="{% url redistwitter.twitter.views.index %}" method="post">
+    <form action="{% url twitter_home %}" method="post">
         {% csrf_token %}
         {{ tweet_form.as_p }}
         <p><input type="submit" value="Tweet"></p>

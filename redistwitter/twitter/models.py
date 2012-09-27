@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from django.utils.encoding import smart_str
 from django.utils.http import int_to_base36
 from django.utils.timezone import now
-from redistwitter.twitter.utils import get_relative_time
+from utils import get_relative_time
 
 r = redis.StrictRedis()
 

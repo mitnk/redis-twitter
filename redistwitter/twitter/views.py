@@ -3,9 +3,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 
-from redistwitter.twitter.decorators import login_required
-from redistwitter.twitter.forms import RegisterForm, LoginForm, TweetForm
-from redistwitter.twitter.models import User, Tweet
+from decorators import login_required
+from forms import RegisterForm, LoginForm, TweetForm
+from models import User, Tweet
 
 
 def register(request):
